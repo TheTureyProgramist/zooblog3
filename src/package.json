@@ -1,0 +1,26 @@
+{
+  "name": "zoo-blog",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": " https://thetureyprogramist.github.io/zoo-blog/",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npx parcel src/index.html",
+    "build": "parcel build src/index.html --no-cache --public-url /crud-js/",
+    "deploy": "gh-pages -d dist",
+    "predeploy": "npm run build",
+    "server": "npx json-server bd.json"
+  },
+  "author": "dima",
+  "license": "ISC",
+  "dependencies": {
+    "basiclightbox": "^5.0.4",
+    "gh-pages": "^6.3.0",
+    "json-server": "^1.0.0-beta.3",
+    "parcel": "^2.15.4",
+    "pnotify": "^5.2.0"
+  },
+  "devDependencies": {
+    "posthtml-include": "^2.0.1"
+  }
+}
