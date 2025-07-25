@@ -160,7 +160,7 @@
       });
     }
   }
-})({"3npBc":[function(require,module,exports,__globalThis) {
+})({"5FNgA":[function(require,module,exports,__globalThis) {
 var global = arguments[3];
 var HMR_HOST = null;
 var HMR_PORT = null;
@@ -168,7 +168,7 @@ var HMR_SERVER_PORT = 1234;
 var HMR_SECURE = false;
 var HMR_ENV_HASH = "439701173a9199ea";
 var HMR_USE_SSE = false;
-module.bundle.HMR_BUNDLE_ID = "ec3d7e03163bdad4";
+module.bundle.HMR_BUNDLE_ID = "bf735e2aa75f57e9";
 "use strict";
 /* global HMR_HOST, HMR_PORT, HMR_SERVER_PORT, HMR_ENV_HASH, HMR_SECURE, HMR_USE_SSE, chrome, browser, __parcel__import__, __parcel__importScripts__, ServiceWorkerGlobalScope */ /*::
 import type {
@@ -666,125 +666,44 @@ function hmrAccept(bundle /*: ParcelRequire */ , id /*: string */ ) {
     }
 }
 
-},{}],"jOXmm":[function(require,module,exports,__globalThis) {
-// const element = document.getElementById('.my-element-selector');
-// element.scrollIntoView({
-//   behavior: 'smooth',
-//   block: 'end',
-// });
-//--------------------------------
-async function getPosts() {
-    try {
-        const response = await fetch('http://localhost:3000/posts');
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u043E\u0442\u0440\u0438\u043C\u0430\u043D\u043D\u0456 \u043F\u043E\u0441\u0442\u0456\u0432:", error);
-        return [];
+},{}],"b5xMN":[function(require,module,exports,__globalThis) {
+const catchAnimal = document.querySelector('.type-animal');
+const resultsContainer = document.createElement('ul');
+catchAnimal.insertAdjacentElement('afterend', resultsContainer);
+let allAnimals = [];
+fetch("https://api.inaturalist.org/v1/taxa?q=a").then((response)=>response.json()).then((data)=>{
+    allAnimals = data.results;
+}).catch((error)=>{
+    console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u0437\u0430\u0432\u0430\u043D\u0442\u0430\u0436\u0435\u043D\u043D\u0456 \u0442\u0432\u0430\u0440\u0438\u043D:", error);
+});
+catchAnimal.addEventListener('input', ()=>{
+    const searchText = catchAnimal.value.toLowerCase();
+    resultsContainer.innerHTML = '';
+    if (searchText === '') return;
+    const filtered = allAnimals.filter((animal)=>animal.name && animal.name.toLowerCase().includes(searchText) || animal.preferred_common_name && animal.preferred_common_name.toLowerCase().includes(searchText));
+    if (filtered.length === 0) {
+        resultsContainer.innerHTML = '<li style="margin-top: 0px; color: red; font-size: 20px;">\u0422\u0432\u0430\u0440\u0438\u043D \u043D\u0435 \u0437\u043D\u0430\u0439\u0434\u0435\u043D\u043E!</li>';
+        return;
     }
-}
-async function updatePost(id, updatedPost) {
-    try {
-        const response = await fetch(`http://localhost:3000/posts/${id}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify(updatedPost)
-        });
-        return await response.json();
-    } catch (error) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u043E\u043D\u043E\u0432\u043B\u0435\u043D\u043D\u0456 \u043F\u043E\u0441\u0442\u0430:", error);
-        return null;
+    if (filtered.length > 10) {
+        resultsContainer.innerHTML = '<li style="margin-top: 40px; color: orange; font-size: 20px;">\u0417\u0430\u0431\u0430\u0433\u0430\u0442\u043E \u0440\u0435\u0437\u0443\u043B\u044C\u0442\u0430\u0442\u0456\u0432, \u0443\u0442\u043E\u0447\u043D\u0456\u0442\u044C \u0437\u0430\u043F\u0438\u0442!</li>';
+        return;
     }
-}
-async function deletePost(id) {
-    try {
-        const response = await fetch(`http://localhost:3000/posts/${id}`, {
-            method: "DELETE"
-        });
-        return await response.json();
-    } catch (error) {
-        console.error("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u0432\u0438\u0434\u0430\u043B\u0435\u043D\u043D\u0456 \u043F\u043E\u0441\u0442\u0430:", error);
-        return null;
-    }
-}
-function addPost(e) {
-    e.preventDefault();
-    const postsList = document.querySelector('.posts-list');
-    const addPostForm = document.getElementById('add-post-form');
-    const name = document.getElementById('name').value.trim();
-    const likes = Number(document.getElementById('likes').value);
-    const postText = document.getElementById('post-text').value.trim();
-    const photo = document.getElementById('photo').value.trim();
-    const comentar = document.getElementById('comentar').value.trim();
-    const id = Math.random().toString(36);
-    const newPost = {
-        id,
-        name,
-        likes,
-        "post-text": postText,
-        photo,
-        comentar
-    };
-    fetch('http://localhost:3000/posts', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(newPost)
-    }).then((res)=>res.json()).then(()=>getPosts()).then((data)=>{
-        postsList.innerHTML = makePostsMarkUp(data);
-        addPostForm.reset();
-    }).catch(()=>alert("\u041F\u043E\u043C\u0438\u043B\u043A\u0430 \u043F\u0440\u0438 \u0434\u043E\u0434\u0430\u0432\u0430\u043D\u043D\u0456 \u043F\u043E\u0441\u0442\u0430"));
-}
-const makePostsMarkUp = (posts)=>{
-    return posts.map((post)=>{
-        return `<li style="margin-bottom: 30px; border-bottom: 1px solid #ccc; padding-bottom: 20px;">
-      <b>ID: ${post.id}<br>
-      <b>\u{406}\u{43C}'\u{44F}:</b> ${post.name}<br>
-      <b>\u{41B}\u{430}\u{439}\u{43A}\u{438}:</b> ${post.likes}<br>
-      <b>\u{41F}\u{43E}\u{441}\u{442}-\u{442}\u{435}\u{43A}\u{441}\u{442}:</b> ${post["post-text"]}<br>
-      <b>\u{424}\u{43E}\u{442}\u{43E}:</b><br>
-      <img src="${post.photo}" alt="\u{424}\u{43E}\u{442}\u{43E}" style="max-width: 200px;"><br>
-      <b>\u{41A}\u{43E}\u{43C}\u{435}\u{43D}\u{442}\u{430}\u{440}:</b> ${post.comentar}<br>
-      <button onclick="window.editPost('${post.id}')">\u{420}\u{435}\u{434}\u{430}\u{433}\u{443}\u{432}\u{430}\u{442}\u{438}</button>
-      <button onclick="window.deletePost('${post.id}')">\u{412}\u{438}\u{434}\u{430}\u{43B}\u{438}\u{442}\u{438}</button>
-    </li>`;
-    }).join('');
-};
-const postsList = document.querySelector('.posts-list');
-const addPostForm = document.getElementById('add-post-form');
-function renderPosts() {
-    getPosts().then((data)=>{
-        postsList.innerHTML = makePostsMarkUp(data);
-    });
-}
-window.deletePost = function(id) {
-    deletePost(id).then(()=>renderPosts());
-};
-window.editPost = function(id) {
-    getPosts().then((data)=>{
-        const post = data.find((p)=>p.id == id);
-        if (!post) return;
-        const name = prompt("\u0412\u043A\u0430\u0436\u0456\u0442\u044C \u043D\u043E\u0432\u0435 \u0456\u043C'\u044F:", post.name);
-        const photo = prompt("\u0412\u043A\u0430\u0436\u0456\u0442\u044C \u043D\u043E\u0432\u0435 \u0444\u043E\u0442\u043E (\u0448\u043B\u044F\u0445):", post.photo);
-        const postText = prompt("\u0412\u043A\u0430\u0436\u0456\u0442\u044C \u043D\u043E\u0432\u0438\u0439 \u0442\u0435\u043A\u0441\u0442:", post["post-text"]);
-        const comentar = prompt("\u041D\u0430\u043F\u0438\u0448\u0456\u0442\u044C \u043A\u043E\u043C\u0435\u043D\u0442\u0430\u0440:", post.comentar);
-        const likes = prompt("\u0414\u043E\u0434\u0430\u0439\u0442\u0435 \u0430\u0431\u043E \u0432\u0456\u0434\u043D\u0456\u043C\u0456\u0442\u044C \u043B\u0430\u0439\u043A\u0438", post.likes);
-        updatePost(id, {
-            ...post,
-            name,
-            photo,
-            "post-text": postText,
-            comentar,
-            likes: Number(likes)
-        }).then(()=>renderPosts());
-    });
-};
-addPostForm.addEventListener('submit', addPost);
-renderPosts();
+    if (filtered.length === 1) {
+        const animal = filtered[0];
+        resultsContainer.innerHTML = `
+      <li class="countryCard" style="margin-top: 6px;">
+        <div>
+          <img src="${animal.default_photo ? animal.default_photo.url : ''}" width="350px" height="350px">
+        </div>
+        <div style="width: 350px;">
+          <h2 style="width: 450px; font-size: 20px; margin-top: 10px;">${animal.preferred_common_name || animal.name}</h2>
+        </div>
+      </li>
+    `;
+    } else resultsContainer.innerHTML = filtered.map((animal)=>`<li style="padding: 20px;">${animal.preferred_common_name || animal.name}</li>`).join('');
+});
 
-},{}]},["3npBc","jOXmm"], "jOXmm", "parcelRequire3d81", {})
+},{}]},["5FNgA","b5xMN"], "b5xMN", "parcelRequire3d81", {})
 
-//# sourceMappingURL=zooblog3.163bdad4.js.map
+//# sourceMappingURL=search.a75f57e9.js.map

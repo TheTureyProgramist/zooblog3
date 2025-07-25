@@ -1,20 +1,20 @@
 {
-"posts": [
+  "posts": [
     {
-      "id": 1,
-      "name": "Ivan",
-      "likes": 15,
-      "post-text": "Цей індик тикий гарний",
+      "id": "1",
+      "name": "Денис та Стас",
+      "likes": 0,
+      "post-text": "Який милий індик",
       "photo": "./src/turkey.jpg",
-      "comentar": "Beatiful"
+      "comentar": "Ваш?"
     },
     {
-    "id": 2,
-      "name": "Olha Kovalenko",
+      "id": "2",
+      "name": "Ольга",
       "likes": 96234243,
       "post-text": "Розкажу сьогодні про вівчарок",
       "photo": "./src/dog.jpg",
-     "comentar": "Ого як мило!"
-   }
-]
+      "comentar": "Ого як мило!"
+    }
+  ]
 }
