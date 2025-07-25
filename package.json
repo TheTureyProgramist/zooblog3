@@ -6,7 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "npx parcel src/index.html",
-    "build": "parcel build src/index.html --no-cache --public-url /crud-js/",
+    "build": "parcel build src/index.html --no-cache --public-url /zooblog3",
     "deploy": "gh-pages -d dist",
     "predeploy": "npm run build",
     "server": "npx json-server bd.json"
